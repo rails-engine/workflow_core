@@ -31,6 +31,7 @@ BTW, the dummy app is a full-featured app with production level codebase that yo
 - Find a good way to validate all nodes of the net, when? where? how?
 - Consider consequences of changing the net, well handle it changes. e.g: what about running instances?
 - Consider side-effect if interactive non-workflow resources.
+- Consider native workflows (those which defined in code and tight with the app) support
 - Stabilizing interfaces.
 - Evaluate that can supporting async, scheduled and event-based transition properly.
 - Efficiency (especially database queries).
