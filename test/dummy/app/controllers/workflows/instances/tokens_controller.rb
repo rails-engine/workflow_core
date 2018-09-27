@@ -12,6 +12,7 @@ module Workflows
 
     # POST /workflows/1/tokens/1/fire
     def show
+      @transition_valid = @token.place.output_transition.options.valid?
       @form_record = @virtual_model.load(@instance.payload)
     end
 
@@ -20,7 +21,10 @@ module Workflows
       @form_record = @virtual_model.load(@instance.payload)
       @form_record.assign_attributes(form_record_params)
 
-      if @form_record.valid?
+      @transition_valid = @token.place.output_transition.options.valid?
+
+      if @form_record.valid? && @transition_valid
+
         @instance.update! payload: (@instance.payload || {}).merge(@form_record.serializable_hash)
         @token.place.output_transition.fire(@token)
 

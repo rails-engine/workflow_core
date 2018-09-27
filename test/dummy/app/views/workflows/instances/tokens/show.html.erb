@@ -1,5 +1,12 @@
 <div class="section">
   <div class="container">
+    <% unless @transition_valid %>
+      <div class="notification is-danger">
+        The transition are not configure properly,
+        please <%= link_to "repair it", edit_workflow_transition_options_path(@workflow, @token.place.output_transition) %>.
+      </div>
+    <% end %>
+
     <%= render "_form_core/render/form",
                form: @form, instance: @form_record,
                options: {scope: :form_record, url: workflow_instance_token_fire_path(@workflow, @instance, @token), local: true} %>

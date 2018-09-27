@@ -12,9 +12,5 @@ class Transitions::ParallelSplit < Transition
     def auto_forwardable?
       true
     end
-
-    def options_configurable?
-      false
-    end
   end
 end
