@@ -19,10 +19,11 @@ class Workflow < WorkflowCore::Workflow
     c = Bpmn::DefinitionContainer.parse(bpmn_xml)
     return unless c
 
+    tokens.delete_all
+    instances.delete_all
+
     transitions.destroy_all
     places.destroy_all
-    instances.destroy_all
-    tokens.destroy_all
 
     place = create_start_place! type: "Places::StartPlace"
     node_queue = c.start_event.outgoing_ids
