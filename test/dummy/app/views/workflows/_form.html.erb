@@ -1,0 +1,41 @@
+<%= form_with(model: workflow, local: true) do |f| %>
+  <% if workflow.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(workflow.errors.count, "error") %> prohibited this workflow from being saved:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% workflow.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input", placeholder: "Name" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, class: "label" %>
+    <div class="control">
+      <%= f.text_area :description, class: "textarea", placeholder: "Description" %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+    </div>
+  </div>
+<% end %>

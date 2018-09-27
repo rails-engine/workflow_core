@@ -1,0 +1,29 @@
+<div class="section">
+  <div class="container">
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @transitions.each do |transition| %>
+        <tr>
+          <td><%= transition.id %></td>
+          <td><%= transition.name %></td>
+          <td><%= transition.class.model_name.human %></td>
+          <td>
+            <% if transition.options_configurable? %>
+              <%= link_to "Options", edit_workflow_transition_options_path(@workflow, transition) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

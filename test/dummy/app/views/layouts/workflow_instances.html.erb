@@ -1,0 +1,18 @@
+<% content_for :sub_content do %>
+  <div class="container">
+    <div class="tabs">
+      <ul>
+        <%= content_tag(:li, class: "#{"is-active" if controller_name == "instances"}") do %>
+          <%= link_to "Payload", workflow_instance_path(@workflow, @instance) %>
+        <% end %>
+        <%= content_tag(:li, class: "#{"is-active" if controller_name.start_with?("tokens")}") do %>
+          <%= link_to "Tokens", workflow_instance_tokens_path(@workflow, @instance) %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  
+  <%= yield %>
+<% end %>
+
+<%= render template: "layouts/workflows" %>

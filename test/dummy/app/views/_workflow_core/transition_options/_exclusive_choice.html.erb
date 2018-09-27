@@ -1,0 +1,31 @@
+<h3 class="title">Exclusive choice options</h3>
+
+<div class="field">
+  <%= f.label :default_next_place, class: "label" %>
+  <div class="control">
+    <div class="select">
+      <%= f.collection_select :default_next_place_id, transition.output_places, :id, :id, include_blank: true %>
+    </div>
+  </div>
+</div>
+
+<div class="field nested_form_field">
+  <h2 class="label">Conditions</h2>
+
+  <div id="conditions" class="collection">
+    <%= f.fields_for :conditions do |ff| %>
+      <%= render "_workflow_core/transition_options/condition", f: ff, transition: transition %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association "Add", f, "conditions",
+                                  class: "button is-small",
+                                  partial: "_workflow_core/transition_options/condition",
+                                  render_options: {
+                                    locals: {transition: transition}
+                                  } %>
+    </div>
+  </div>
+</div>
+
+<hr>

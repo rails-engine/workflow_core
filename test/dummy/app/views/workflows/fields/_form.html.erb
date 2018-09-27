@@ -1,0 +1,60 @@
+<%= form_with(model: [@workflow, field.becomes(Field)], scope: :field, local: true) do |f| %>
+  <% if field.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(field.errors.count, "error") %> prohibited this form from being saved:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% field.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input", placeholder: "Name" %>
+    </div>
+    <p class="help">
+      The identifier of the field, the value must follow the pattern <code><%= Field::NAME_REGEX.source %></code> and Ruby's variable naming rule.
+    </p>
+  </div>
+
+  <div class="field">
+    <%= f.label :label, class: "label" %>
+    <div class="control">
+      <%= f.text_field :label, class: "input", placeholder: "Label" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :hint, class: "label" %>
+    <div class="control">
+      <%= f.text_field :hint, class: "input", placeholder: "Hint" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :type, class: "label" %>
+    <div class="control">
+      <span class="select">
+        <%= f.select :type, options_for_field_types(selected: field.class.to_s) %>
+      </span>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+    </div>
+  </div>
+<% end %>

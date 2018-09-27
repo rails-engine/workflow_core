@@ -1,0 +1,44 @@
+<% validations.build_length unless validations.length %>
+<% length = validations.length %>
+
+<h3 class="title">Length</h3>
+
+<%= f.fields_for :length, length do |ff| %>
+  <% if length.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(length.errors.count, "error") %> prohibited this form from being saved:
+        </p>
+      </div>
+      <div class="message-body">
+        <% length.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="field">
+    <%= ff.label :minimum %>
+    <div class="control">
+      <%= ff.number_field :minimum, min: 0, step: 1, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= ff.label :maximum %>
+    <div class="control">
+      <%= ff.number_field :maximum, min: 0, step: 1, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= ff.label :is %>
+    <div class="control">
+      <%= ff.number_field :is, min: 0, step: 1, class: 'input' %>
+    </div>
+  </div>
+<% end %>
+
+<hr>

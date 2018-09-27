@@ -1,0 +1,31 @@
+<div class="section">
+  <div class="container">
+    <p content="content">
+      <%= link_to "New group", new_group_path, class: "button is-primary" %>
+    </p>
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Parent name</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.id %></td>
+          <td><%= group.name %></td>
+          <td><%= group.parent&.name %></td>
+          <td>
+            <%= link_to "Edit", edit_group_path(group) %> |
+            <%= link_to "Destroy", group, method: :delete, data: {confirm: "Are you sure?"} %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

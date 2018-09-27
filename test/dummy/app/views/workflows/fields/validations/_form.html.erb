@@ -1,0 +1,34 @@
+<%= form_with(model: validations, scope: :validations, url: workflow_field_validations_path(@workflow, field), method: :patch, local: true) do |f| %>
+  <% if validations.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(validations.errors.count, "error") %> prohibited this form from being saved:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% validations.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <% validations.class.attribute_names.each do |attribute_name| %>
+    <%= render "_form_core/validations/#{attribute_name}", f: f, validations: validations %>
+  <% end %>
+  <% validations.class.reflections.keys.each do |attribute_name| %>
+    <%= render "_form_core/validations/#{attribute_name}", f: f, validations: validations %>
+  <% end %>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Update", class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+    </div>
+  </div>
+<% end %>

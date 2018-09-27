@@ -1,0 +1,42 @@
+<div class="nested_form">
+  <% if f.object.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(f.object.errors.count, "error") %> prohibited this form from being submitted:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% f.object.errors.full_messages.each do |message| %>
+            <li>
+              <%= message %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :condition_expression, class: "label" %>
+    <div class="control">
+      <%= f.text_field :condition_expression, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :place, class: "label" %>
+    <div class="control">
+      <div class="select">
+        <%= f.collection_select :place_id, transition.output_places, :id, :id, include_blank: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to_remove_association "Remove", f, class: "button is-small is-danger", wrapper_class: "nested_form" %>
+    </div>
+  </div>
+</div>

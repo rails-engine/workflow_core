@@ -1,0 +1,11 @@
+<div class="section">
+  <div class="container">
+    <p content="content">
+      <iframe id="iframe-visualize"
+              srcdoc="<%= Graphviz::output(@workflow.to_graph, format: "svg") %>"
+              width="100%"
+              onload="this.height = getElementById('iframe-visualize').contentDocument.body.scrollHeight;">
+      </iframe>
+    </p>
+  </div>
+</div>

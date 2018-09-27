@@ -1,0 +1,3 @@
+<% form.fields.map { |field| present(field, target: instance) }.each do |field| %>
+  <p><%= field.label %>: <%= field.value_for_preview %></p>
+<% end %>

@@ -1,0 +1,37 @@
+<% options ||= {} %>
+<%= form_with(model: instance, **options) do |f| %>
+  <% if instance.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(instance.errors.count, "error") %> prohibited this form from being submitted:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% instance.errors.messages.each do |name, messages| %>
+            <% messages.each do |message| %>
+              <li><%= "#{field_label(form, field_name: name)} #{message}" %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <% form.fields.each do |field| %>
+    <% field = present(field, target: instance) %>
+    <% next if field.access_hidden? %>
+
+    <%= render "_form_core/fields/#{field.type_key}", f: f, field: field %>
+  <% end %>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Submit", class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+    </div>
+  </div>
+<% end %>

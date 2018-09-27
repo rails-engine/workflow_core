@@ -1,0 +1,7 @@
+<div class="section">
+  <div class="container">
+    <%= render "_form_core/render/form",
+               form: @form, instance: @form_record,
+               options: {scope: :form_record, url: workflow_instance_token_fire_path(@workflow, @instance, @token), local: true} %>
+  </div>
+</div>

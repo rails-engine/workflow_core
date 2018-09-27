@@ -1,0 +1,37 @@
+<div class="section">
+  <div class="container">
+    <p content="content">
+      <%= link_to "New field", new_workflow_field_path(@workflow), class: "button is-primary" %>
+    </p>
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Label</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @fields.each do |field| %>
+        <tr>
+          <td><%= field.name %></td>
+          <td><%= field.label %></td>
+          <td><%= field.class.model_name.human %></td>
+          <td>
+            <% if field.validations_configurable? %>
+              <%= link_to "Validations", edit_workflow_field_validations_path(@workflow, field) %> |
+            <% end %>
+            <% if field.options_configurable? %>
+              <%= link_to "Options", edit_workflow_field_options_path(@workflow, field) %> |
+            <% end %>
+            <%= link_to "Edit", edit_workflow_field_path(@workflow, field) %> |
+            <%= link_to "Destroy", workflow_field_path(@workflow, field), method: :delete, data: {confirm: "Are you sure?"} %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,65 @@
+@import "selectize";
+@import "bulma";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  & nav.nav {
+    a.brand {
+      padding: 0.5rem 0.75em 0.5em 0;
+    }
+  }
+
+  & .main {
+    flex: 1;
+  }
+
+  & footer.footer {
+    padding: 3rem 1.5rem 3rem;
+  }
+}
+
+.flash {
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: 2.5;
+  background: $info;
+  color: $text-invert;
+  text-align: center;
+}
+
+#alert {
+  background: $danger;
+}
+
+.nested_form_field {
+  .collection {
+    .nested_form {
+      border: 1px solid $green;
+      padding: 0.5em;
+      margin-left: 0.75em;
+      margin-bottom: 0.75rem;
+    }
+  }
+}
+
+.content {
+  .nested-content {
+    margin-left: 0.75em;
+    margin-bottom: 1em;
+  }
+}
+
+.message-body.content {
+  > :first-child {
+    margin-top: 0;
+  }
+}
+
+.field {
+  flex: 1;
+}

@@ -1,0 +1,30 @@
+<%= form_with(model: options, scope: :options, url: workflow_transition_options_path(@workflow, transition), method: :patch, local: true) do |f| %>
+  <% if options.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(options.errors.count, "error") %> prohibited this form from being saved:
+        </p>
+      </div>
+      <div class="message-body content">
+        <ul>
+          <% options.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  <% end %>
+
+  <%= render "_workflow_core/transition_options/#{transition.type_key}", f: f, transition: transition, options: options %>
+  <%= render "_workflow_core/transition_options/field_overrides", f: f, transition: transition, options: options %>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Update", class: 'button is-primary' %>
+    </div>
+    <div class="control">
+      <%= link_to 'Back', url_for(:back), class: 'button is-link' %>
+    </div>
+  </div>
+<% end %>

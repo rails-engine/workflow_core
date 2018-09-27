@@ -1,0 +1,30 @@
+<div class="section">
+  <div class="container">
+    <p content="content">
+      <%= link_to "New instance", workflow_instances_path(@workflow), method: :post, class: "button is-primary" %>
+    </p>
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Updated at</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @instances.each do |instance| %>
+        <tr>
+          <td><%= instance.id %></td>
+          <td><%= instance.status %></td>
+          <td><%= time_tag instance.updated_at %></td>
+          <td>
+            <%= link_to "Show", workflow_instance_path(@workflow, instance) %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

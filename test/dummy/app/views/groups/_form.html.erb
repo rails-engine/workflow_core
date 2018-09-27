@@ -1,0 +1,42 @@
+<%= form_with(model: group, local: true) do |f| %>
+  <% if group.errors.any? %>
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>
+          <%= pluralize(group.errors.count, "error") %> prohibited this form from being saved:
+        </p>
+      </div>
+      <div class="message-body">
+        <% group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, id: :user_name, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :parent, class: "label" %>
+    <div class="control">
+      <div class="select">
+        <% parent_candidates = Group.all.reject { |g| group.child_ids.include?(g.id) || g == group unless group.new_record? } %>
+        <%= f.collection_select :parent_id, parent_candidates, :id, :name, include_blank: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+    </div>
+  </div>
+<% end %>

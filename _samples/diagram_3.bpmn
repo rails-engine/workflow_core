@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_0w9rj1f" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0qzo3lb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_07nyace" name="Step 1">
+      <bpmn:incoming>SequenceFlow_0qzo3lb</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1fr8c9x</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0v54qlb</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0qzo3lb" sourceRef="StartEvent_1" targetRef="Task_07nyace" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1jpd3ln">
+      <bpmn:incoming>SequenceFlow_0v54qlb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s8t845</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1fr8c9x</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0v54qlb" sourceRef="Task_07nyace" targetRef="ExclusiveGateway_1jpd3ln" />
+    <bpmn:task id="Task_0ym21fx" name="Step 2">
+      <bpmn:incoming>SequenceFlow_1s8t845</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0nzmb8s</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1s8t845" sourceRef="ExclusiveGateway_1jpd3ln" targetRef="Task_0ym21fx" />
+    <bpmn:endEvent id="EndEvent_1jlbp8k">
+      <bpmn:incoming>SequenceFlow_0nzmb8s</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0nzmb8s" sourceRef="Task_0ym21fx" targetRef="EndEvent_1jlbp8k" />
+    <bpmn:sequenceFlow id="SequenceFlow_1fr8c9x" sourceRef="ExclusiveGateway_1jpd3ln" targetRef="Task_07nyace" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_07nyace_di" bpmnElement="Task_07nyace">
+        <dc:Bounds x="259" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qzo3lb_di" bpmnElement="SequenceFlow_0qzo3lb">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="259" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1jpd3ln_di" bpmnElement="ExclusiveGateway_1jpd3ln" isMarkerVisible="true">
+        <dc:Bounds x="409" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0v54qlb_di" bpmnElement="SequenceFlow_0v54qlb">
+        <di:waypoint x="359" y="120" />
+        <di:waypoint x="409" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_0ym21fx_di" bpmnElement="Task_0ym21fx">
+        <dc:Bounds x="509" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s8t845_di" bpmnElement="SequenceFlow_1s8t845">
+        <di:waypoint x="459" y="120" />
+        <di:waypoint x="509" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1jlbp8k_di" bpmnElement="EndEvent_1jlbp8k">
+        <dc:Bounds x="659" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0nzmb8s_di" bpmnElement="SequenceFlow_0nzmb8s">
+        <di:waypoint x="609" y="120" />
+        <di:waypoint x="659" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fr8c9x_di" bpmnElement="SequenceFlow_1fr8c9x">
+        <di:waypoint x="434" y="120" />
+        <di:waypoint x="434" y="30" />
+        <di:waypoint x="309" y="30" />
+        <di:waypoint x="309" y="80" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

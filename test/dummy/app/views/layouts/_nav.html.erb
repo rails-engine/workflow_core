@@ -1,0 +1,17 @@
+<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <%= link_to "Workflow Core", root_path, class: "navbar-item" %>
+    </div>
+
+    <div class="navbar-end">
+      <%= link_to 'Users', users_path, class: "navbar-item #{"is-active" if controller_name == "users"}" %>
+      <%= link_to 'Groups', groups_path, class: "navbar-item #{"is-active" if controller_name == "groups"}" %>
+      <%= link_to 'Workflows', workflows_path, class: "navbar-item #{"is-active" if controller_name.start_with?("workflows")}" %>
+
+      <% if current_user %>
+        <%= link_to "Sign out #{current_user.name}", sessions_path, class: "navbar-item", method: :delete %>
+      <% end %>
+    </div>
+  </div>
+</nav>

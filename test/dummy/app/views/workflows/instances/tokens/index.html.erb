@@ -1,0 +1,40 @@
+<div class="section">
+  <div class="container">
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Transition id</th>
+        <th>Transition name</th>
+        <th>Created at</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tfoot>
+      <tr>
+        <th colspan="6">
+          Instance status: <%= @instance.status %>
+        </th>
+      </tr>
+      </tfoot>
+      <% @tokens.each do |token| %>
+        <tr>
+          <td><%= token.id %></td>
+          <td><%= token.status %></td>
+          <td><%= token.place&.output_transition&.id %></td>
+          <td><%= token.place&.output_transition&.name %></td>
+          <td><%= time_tag token.updated_at %></td>
+          <td>
+            <% if token.processing? && token.place&.output_transition %>
+              <%= link_to "Fire", workflow_instance_token_path(@workflow, @instance, token) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

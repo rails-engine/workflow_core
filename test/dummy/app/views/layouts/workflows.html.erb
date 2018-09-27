@@ -1,0 +1,42 @@
+<% content_for :content do %>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <p class="title">
+          <%= @workflow.name %>
+        </p>
+        <p class="subtitle">
+          <%= @workflow.description %>
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <div class="container">
+        <nav class="tabs is-boxed">
+          <ul>
+            <%= content_tag(:li, class: "#{"is-active" if controller_name == "workflows"}") do %>
+              <%= link_to "Overview", workflow_path(@workflow) %>
+            <% end %>
+            <%= content_tag(:li, class: "#{"is-active" if controller_path.start_with?("workflows/fields")}") do %>
+              <%= link_to "Fields", workflow_fields_path(@workflow) %>
+            <% end %>
+            <%= content_tag(:li, class: "#{"is-active" if controller_path.start_with?("workflows/transitions")}") do %>
+              <%= link_to "Transitions", workflow_transitions_path(@workflow) %>
+            <% end %>
+            <%= content_tag(:li, class: "#{"is-active" if controller_path.start_with?("workflows/instances")}") do %>
+              <%= link_to "Instances", workflow_instances_path(@workflow) %>
+            <% end %>
+            <%= content_tag(:li, class: "#{"is-active" if controller_path.start_with?("workflows/loads")}") do %>
+              <%= link_to "Load form BPMN", workflow_load_path(@workflow) %>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+  
+  <%= content_for?(:sub_content) ? yield(:sub_content) : yield %>
+<% end %>
+
+<%= render template: "layouts/application" %>
