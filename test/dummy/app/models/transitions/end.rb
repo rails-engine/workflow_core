@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Transitions::End < Transition
-  def fire(token)
+  def on_fire(token, _transaction_options, **_options)
     p = output_places.first # assume only one output place
 
     token.completed!

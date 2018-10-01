@@ -3,14 +3,6 @@
 class Transition < WorkflowCore::Transition
   serialize :options, Transitions::Options::Common
 
-  def auto_forward(next_token)
-    transition = next_token.place.output_transition
-    return unless transition
-    return unless transition.auto_forwardable?
-
-    transition.fire(next_token)
-  end
-
   def auto_forwardable?
     false
   end
@@ -44,6 +36,16 @@ class Transition < WorkflowCore::Transition
     end
 
     g
+  end
+
+  protected
+
+  def auto_forward(next_token, transaction_options, **options)
+    transition = next_token.place.output_transition
+    return unless transition
+    return unless transition.auto_forwardable?
+
+    transition.on_fire(next_token, transaction_options, options)
   end
 end
 

@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/rails-engine/script_core.git
-  revision: f086b63c03061732c8a760b97d54a9d2e7cbec68
-  submodules: true
-  specs:
-    script_core (0.0.4)
-      msgpack (~> 1.0)
-      rake-compiler (~> 1.0)
-
 PATH
   remote: .
   specs:
@@ -180,7 +171,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rails_config (0.2.3)
+    rubocop-rails_config (0.2.5)
       railties (>= 3.0)
       rubocop (~> 0.56)
     ruby-progressbar (1.10.0)
@@ -196,6 +187,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    script_core (0.0.4)
+      msgpack (~> 1.0)
+      rake-compiler (~> 1.0)
     selectize-rails (0.12.5)
     sprockets (4.0.0.beta8)
       concurrent-ruby (~> 1.0)
@@ -248,7 +242,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails_config
   sass-rails
-  script_core!
+  script_core
   selectize-rails
   sprockets (~> 4.0.0.beta4)
   sqlite3

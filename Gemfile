@@ -52,6 +52,6 @@ gem "form_core"
 gem "duck_record"
 gem "closure_tree"
 gem "cocoon"
-gem "script_core", github: "rails-engine/script_core", submodules: true
+gem "script_core"
 
 gem "graphviz"

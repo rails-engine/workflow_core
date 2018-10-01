@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Transitions::SimpleMerge < Transition
-  def fire(token)
+  def on_fire(token, transaction_options, **options)
     p = output_places.first # assume only one output place
     # return unless p.tokens.size.zero?
 
@@ -14,7 +14,7 @@ class Transitions::SimpleMerge < Transition
     if completed_tokens.size == 1
       next_token = p.tokens.create! previous: token, type: "Token",
                                     instance: token.instance, workflow: workflow
-      auto_forward(next_token)
+      auto_forward(next_token, transaction_options, options)
     end
   end
 
