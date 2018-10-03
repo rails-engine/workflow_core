@@ -2,6 +2,8 @@
 
 module WorkflowCore
   class Token < ApplicationRecord
+    include WorkflowCore::Concerns::Models::Token
+    
     self.table_name = "workflow_tokens"
 
     belongs_to :instance,

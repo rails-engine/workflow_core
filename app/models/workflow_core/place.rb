@@ -2,6 +2,8 @@
 
 module WorkflowCore
   class Place < ApplicationRecord
+    include WorkflowCore::Concerns::Models::Place
+
     self.table_name = "workflow_places"
 
     belongs_to :workflow

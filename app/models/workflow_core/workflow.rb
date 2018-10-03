@@ -2,6 +2,8 @@
 
 module WorkflowCore
   class Workflow < ApplicationRecord
+    include WorkflowCore::Concerns::Models::Workflow
+
     self.table_name = "workflows"
 
     has_one :start_place, class_name: "WorkflowCore::Place", dependent: :destroy

@@ -2,6 +2,8 @@
 
 module WorkflowCore
   class WorkflowInstance < ApplicationRecord
+    include WorkflowCore::Concerns::Models::WorkflowInstance
+
     self.table_name = "workflow_instances"
 
     belongs_to :workflow
