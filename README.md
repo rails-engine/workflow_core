@@ -9,13 +9,39 @@ Workflow Core
 
 A Rails engine which providing essential infrastructure of workflow.
 
-It's based on [Workflow Net](http://mlwiki.org/index.php/Workflow_Nets) technique.
+WorkflowCore is originally designed for Business Process Management (BPM), in this scenario:
 
-The gem provides:
+- Workflows are usually defined by users in runtime
+- Task may tight with application features
 
-- Models to describe workflow nets
-- Models to describe workflow instances
-- Interfaces to define transitions
+WorkflowCore is based on [Workflow Net](http://mlwiki.org/index.php/Workflow_Nets) technique, and only providing essential features for a workflow engine.
+
+## Features
+
+### Models to describe workflow net
+
+Workflow Net is a special case of [Petri net](http://mlwiki.org/index.php/Petri_Nets)
+
+![](_assets/workflow_net.png)
+
+There are 2 kinds of nodes
+
+- Place (circles): represent the states of a system
+- Transition (squares): represent state changes
+
+WorkflowCore provides Place & Transition models that can represent a workflow net, and a Workflow model as root.
+
+### Models to describe workflow instances
+
+Workflow net use Token (dots in places) to tracking states of a process, every place can contain one or more tokens.
+ 
+WorkflowCore provides WorkflowInstance model represent processes, and it has many tokens.
+
+### Interfaces to define how to transit
+
+Transition has a transactional `fire` method which accept a token that would consume it and generate new token(s), developer could create many kinds of transitions and overrides `on_fire` to define how to transit
+
+In addition, `on_error` is used for error handling.
 
 ## Why “core”
 
@@ -27,10 +53,7 @@ BTW, the dummy app is a full-featured app with production level codebase that yo
 
 ## Todo
 
-- Make sure transit must be an atomic operation, and help developers to avoiding Rails' nested transaction pitfalls.
 - Find a good way to validate all nodes of the net, when? where? how?
-- Consider consequences of changing the net, well handle it changes. e.g: what about running instances?
-- Consider side-effect if interactive non-workflow resources.
 - Consider native workflows (those which defined in code and tight with the app) support
 - Stabilizing interfaces.
 - Evaluate that can supporting async, scheduled and event-based transition properly.
@@ -89,42 +112,6 @@ The dummy app integrates with [Form Core](https://github.com/rails-engine/form_c
 
 ![](_assets/dummy_overview.png)
 
-### Features
-
-#### Importing workflow definitions from a BPMN2 xml,
-
-![](_assets/importing_bpmn.png)
-
-Because there isn't have a easy-to-use web-based flowchart designer, I implement a stupid BPMN2 importer, it have many restrictions:
-
-- Only supports `Sequence`, `Start event`, `End event`, `Parallel gateway` and `Exclusive gateway`
-- Using gateway to fork flows must have corresponding join (or merge) gateway
-- Only read `name` property, other such as `condition expression` must configure on the dummy app
-
-You can check `_samples` folder, I've already provided some samples, or you can try a BPMN2 designer (e.g [Camunda modeler](https://github.com/camunda/camunda-modeler)).
-
-#### Defining form
-
-![](_assets/defining_form.png)
-
-You can defining a dynamic form for a workflow.
-
-In transition's options, you can configure field's accessibility
-
-#### Exclusive choice configuration supports Ruby expression
-
-![](_assets/editing_transition.png)
-
-Exclusive choice is a special transition that needs to configure conditions that determine how to transit to a branch.
-
-The condition is a Ruby expression, and running in a mRuby sandbox (powered by ScriptCore but it's also undone yet), and you can access form data through `@input[:payload]`, for example, there is a field named `approved`, we can check the field checked by `@input[:payload]["approved"]`
-
-#### Run a workflow
-
-See `Instance` tab, that should make sense.
-
-### Usage
-
 **You need install Graphviz first**
 
 Clone the repository.
@@ -158,6 +145,40 @@ $ bin/rails s
 ```
 
 Open your browser, and visit `http://localhost:3000`
+
+### Features
+
+#### Importing workflow definitions from a BPMN2 xml,
+
+![](_assets/importing_bpmn.png)
+
+Because there isn't have a easy-to-use web-based flowchart designer, I implement a stupid BPMN2 importer, it have many restrictions:
+
+- Only supports `Sequence`, `Start event`, `End event`, `Parallel gateway` and `Exclusive gateway`
+- Using gateway to fork flows must have corresponding join (or merge) gateway
+- Only read `name` property, other such as `condition expression` must configure on the dummy app
+
+You can check `_samples` folder, I've already provided some samples, or you can try a BPMN2 designer (e.g [Camunda modeler](https://github.com/camunda/camunda-modeler)).
+
+#### Defining form
+
+![](_assets/defining_form.png)
+
+You can defining a dynamic form for a workflow.
+
+In transition's options, you can configure field's accessibility
+
+#### Exclusive choice configuration supports Ruby expression
+
+![](_assets/editing_transition.png)
+
+Exclusive choice is a special transition that needs to configure conditions that determine how to transit to a branch.
+
+The condition is a Ruby expression, and running in a mRuby sandbox (powered by ScriptCore but it's also undone yet), and you can access form data through `@input[:payload]`, for example, there is a field named `approved`, we can check the field checked by `@input[:payload]["approved"]`
+
+#### Run a workflow
+
+See `Instance` tab, that should make sense.
 
 ## Contributing
 
