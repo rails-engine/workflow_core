@@ -11,8 +11,9 @@ A Rails engine which providing essential infrastructure of workflow.
 
 WorkflowCore is originally designed for Business Process Management (BPM), in this scenario:
 
-- Workflows are usually defined by users in runtime
+- Workflows are usually defined by users idynamically
 - Task may tight with application features
+- May meet some special or weird requirements
 
 WorkflowCore is based on [Workflow Net](http://mlwiki.org/index.php/Workflow_Nets) technique, and only providing essential features for a workflow engine.
 
@@ -24,7 +25,7 @@ Workflow Net is a special case of [Petri net](http://mlwiki.org/index.php/Petri_
 
 ![](_assets/workflow_net.png)
 
-There are 2 kinds of nodes
+There are two kinds of nodes
 
 - Place (circles): represent the states of a system
 - Transition (squares): represent state changes
