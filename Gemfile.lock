@@ -62,13 +62,13 @@ GEM
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.3)
-    bulma-rails (0.7.1)
+    bulma-rails (0.7.2)
       sass (~> 3.2)
     byebug (10.0.2)
     closure_tree (7.0.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
-    cocoon (1.2.11)
+    cocoon (1.2.12)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
@@ -86,7 +86,7 @@ GEM
       activesupport (>= 4.2.0)
     graphviz (1.1.0)
       process-pipeline
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.1)
     jquery-rails (4.3.3)
@@ -100,7 +100,7 @@ GEM
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
@@ -252,4 +252,4 @@ DEPENDENCIES
   workflow_core!
 
 BUNDLED WITH
-   1.16.4
+   1.16.6
