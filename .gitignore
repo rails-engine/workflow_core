@@ -22,6 +22,9 @@ test/dummy/tmp/
 test/dummy/storage/*
 !test/dummy/storage/.keep
 
+# Ignore compiled mruby in dummy app
+/test/dummy/mruby/bin
+
 pkg/
 .byebug_history
 

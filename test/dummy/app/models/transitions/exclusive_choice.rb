@@ -7,8 +7,7 @@ class Transitions::ExclusiveChoice < Transition
     instance = token.instance
 
     next_place_id = self.options.conditions.select do |condition|
-      r = ScriptCore.run input: {payload: instance.payload},
-                         sources: [["expression", "@output = #{condition.condition_expression}"]]
+      r = ScriptEngine.eval2 condition.condition_expression, input: instance.payload
       if r.errors.any?
         raise r.errors.map(&:message).join("; ")
       end

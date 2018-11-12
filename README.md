@@ -113,7 +113,7 @@ The dummy app integrates with [Form Core](https://github.com/rails-engine/form_c
 
 ![](_assets/dummy_overview.png)
 
-**You need install Graphviz first**
+**You need to install Graphviz first**
 
 Clone the repository.
 
@@ -131,6 +131,13 @@ Run bundler
 
 ```sh
 $ bundle install
+```
+
+Build mruby engine & engine lib
+
+```sh
+$ bin/rails app:script_core:engine:build
+$ bin/rails app:script_core:engine:compile_lib 
 ```
 
 Preparing database
@@ -175,7 +182,9 @@ In transition's options, you can configure field's accessibility
 
 Exclusive choice is a special transition that needs to configure conditions that determine how to transit to a branch.
 
-The condition is a Ruby expression, and running in a mRuby sandbox (powered by ScriptCore but it's also undone yet), and you can access form data through `@input[:payload]`, for example, there is a field named `approved`, we can check the field checked by `@input[:payload]["approved"]`
+The condition is a Ruby expression, and running in a mRuby sandbox (powered by [ScriptCore](https://github.com/rails-engine/script_core)),
+and you can access form data through `Input`, for example, there is a field named `approved`,
+we can check the field checked by `Input["approved"]`
 
 #### Run a workflow
 

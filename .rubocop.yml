@@ -5,7 +5,8 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
-    - 'test/dummy/db/schema.rb'
+    - test/dummy/db/schema.rb
+    - test/dummy/mruby/**/*
 
 # frozen_string_literal: true
 Style/FrozenStringLiteralComment:
