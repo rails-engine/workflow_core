@@ -2,6 +2,8 @@
 
 class Workflow < WorkflowCore::Workflow
   has_one :form, dependent: :destroy
+  has_many :nested_forms
+  has_many :fields
 
   after_create :auto_create_form!
   after_create :auto_create_start_place!

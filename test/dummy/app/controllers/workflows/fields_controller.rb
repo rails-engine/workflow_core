@@ -22,7 +22,7 @@ class Workflows::FieldsController < Workflows::ApplicationController
   def create
     @field = @form.fields.build(field_params)
 
-    if @field.save
+    if @field.save!
       redirect_to workflow_fields_url(@workflow), notice: "Field was successfully created."
     else
       render :new

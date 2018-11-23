@@ -1,0 +1,23 @@
+<div class="field nested_form_field">
+  <h2 class="label"><%= field.label %></h2>
+
+  <%= tag.div id: field.name, class: "collection" do %>
+    <%= f.fields_for field.name do |ff| %>
+      <%= render "_form_core/fields/nested_form", f: ff, field: field, form: field.nested_form %>
+    <% end %>
+
+    <div class="links">
+      <% if field.access_read_and_write? %>
+        <%= link_to_add_association "Add", f, field.name,
+                                    class: "button is-small",
+                                    partial: "_form_core/fields/nested_form",
+                                    render_options: {
+                                      locals: {field: field, form: field.nested_form}
+                                    } %>
+      <% end %>
+      <% if field.hint.present? %>
+        <p class="help"><%= field.hint %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -24,15 +24,20 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.string "label", default: ""
     t.string "hint", default: ""
     t.integer "position"
+    t.integer "workflow_id"
     t.index ["form_id"], name: "index_fields_on_form_id"
     t.index ["type"], name: "index_fields_on_type"
+    t.index ["workflow_id"], name: "index_fields_on_workflow_id"
   end
 
   create_table "forms", force: :cascade do |t|
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "attachable_type"
+    t.integer "attachable_id"
     t.integer "workflow_id"
+    t.index ["attachable_type", "attachable_id"], name: "index_forms_on_attachable_type_and_attachable_id"
     t.index ["type"], name: "index_forms_on_type"
     t.index ["workflow_id"], name: "index_forms_on_workflow_id"
   end

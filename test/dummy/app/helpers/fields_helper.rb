@@ -12,4 +12,15 @@ module FieldsHelper
       field.name == field_name
     end.first&.label
   end
+
+  def smart_form_fields_path(workflow, form)
+    case form
+    when Form
+      workflow_fields_path(workflow, form)
+    when NestedForm
+      workflow_nested_form_fields_path(workflow, form)
+    else
+      raise "Unknown form: #{form.class}"
+    end
+  end
 end

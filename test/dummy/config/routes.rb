@@ -13,6 +13,11 @@ Rails.application.routes.draw do
           resource :options, only: %i[edit update]
         end
       end
+      resources :nested_forms, only: %i[] do
+        scope module: :nested_forms do
+          resources :fields, except: %i[show]
+        end
+      end
       resources :transitions, except: %i[show] do
         scope module: :transitions do
           resource :options, only: %i[edit update]

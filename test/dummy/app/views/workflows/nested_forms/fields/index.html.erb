@@ -1,0 +1,43 @@
+<div class="section">
+  <div class="container">
+    <p content="content">
+      <%= link_to "New field", new_workflow_nested_form_field_path(@workflow, @nested_form), class: "button is-primary" %>
+      <%= link_to "Back", smart_form_fields_path(@workflow, @nested_form.attachable.form), class: "button is-link" %>
+    </p>
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Label</th>
+        <th>Type</th>
+        <th>Accessibility</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @fields.each do |field| %>
+          <tr>
+            <td><%= field.name %></td>
+            <td><%= field.label %></td>
+            <td><%= field.class.model_name.human %></td>
+            <td><%= Field.human_enum_value(:accessibility, field.accessibility) %></td>
+            <td>
+              <% if field.validations_configurable? %>
+                <%= link_to "Validations", edit_workflow_field_validations_path(@workflow, field) %> |
+              <% end %>
+              <% if field.options_configurable? %>
+                <%= link_to "Options", edit_workflow_field_options_path(@workflow, field) %> |
+              <% end %>
+              <% if field.attached_nested_form? %>
+                <%= link_to "Fields", workflow_nested_form_fields_url(@workflow, field.nested_form) %> |
+              <% end %>
+              <%= link_to "Edit", edit_workflow_nested_form_field_path(@workflow, @nested_form, field) %> |
+              <%= link_to "Destroy", workflow_nested_form_field_path(@workflow, @nested_form, field), method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

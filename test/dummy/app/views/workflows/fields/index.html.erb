@@ -25,6 +25,9 @@
             <% if field.options_configurable? %>
               <%= link_to "Options", edit_workflow_field_options_path(@workflow, field) %> |
             <% end %>
+            <% if field.attached_nested_form? %>
+              <%= link_to "Fields", workflow_nested_form_fields_url(@workflow, field.nested_form) %> |
+            <% end %>
             <%= link_to "Edit", edit_workflow_field_path(@workflow, field) %> |
             <%= link_to "Destroy", workflow_field_path(@workflow, field), method: :delete, data: {confirm: "Are you sure?"} %>
           </td>

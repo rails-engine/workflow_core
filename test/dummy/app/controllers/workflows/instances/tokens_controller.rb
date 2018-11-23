@@ -20,11 +20,9 @@ module Workflows
     def fire
       @form_record = @virtual_model.load(@instance.payload)
       @form_record.assign_attributes(form_record_params)
-
       @transition_valid = @token.place.output_transition.options.valid?
 
       if @form_record.valid? && @transition_valid
-
         @instance.update! payload: (@instance.payload || {}).merge(@form_record.serializable_hash)
         @token.place.output_transition.fire(@token)
 

@@ -1,4 +1,6 @@
 <% options ||= {} %>
+<% back_url ||= url_for(:back) %>
+
 <%= form_with(model: instance, **options) do |f| %>
   <% if instance.errors.any? %>
     <article class="message is-danger">
@@ -31,7 +33,7 @@
       <%= f.submit "Submit", class: "button is-primary" %>
     </div>
     <div class="control">
-      <%= link_to "Back", url_for(:back), class: "button is-link" %>
+      <%= link_to "Back", back_url, class: "button is-link" %>
     </div>
   </div>
 <% end %>

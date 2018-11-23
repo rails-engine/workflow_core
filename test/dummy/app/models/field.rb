@@ -5,7 +5,8 @@ class Field < ApplicationRecord
 
   self.table_name = "fields"
 
-  belongs_to :form, class_name: "Form", foreign_key: "form_id", touch: true
+  belongs_to :form, class_name: "MetalForm", foreign_key: "form_id", touch: true
+  belongs_to :workflow
 
   validates :label,
             presence: true
@@ -18,6 +19,13 @@ class Field < ApplicationRecord
   default_value_for :name,
                     -> (_) { "field_#{SecureRandom.hex(3)}" },
                     allow_nil: false
+
+  default_value_for :workflow_id,
+                    -> (field) {
+                      if field.has_attribute?(:workflow_id) || field.workflow
+                        field&.form&.workflow_id
+                      end
+                    }, allow_nil: false
 
   def self.type_key
     model_name.name.split("::").last.underscore
@@ -35,7 +43,7 @@ class Field < ApplicationRecord
     validations.is_a?(FieldOptions) && validations.attributes.any?
   end
 
-  def attach_choices?
+  def attached_nested_form?
     false
   end
 
