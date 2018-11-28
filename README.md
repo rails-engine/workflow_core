@@ -11,7 +11,7 @@ A Rails engine which providing essential infrastructure of workflow.
 
 WorkflowCore is originally designed for Business Process Management (BPM), in this scenario:
 
-- Workflows are usually defined by users idynamically
+- Workflows are usually defined by users dynamically
 - Task may tight with application features
 - May meet some special or weird requirements
 
