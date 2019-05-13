@@ -8,9 +8,9 @@ class Transitions::ParallelSplit < Transition
                                     instance: token.instance, workflow: workflow
       auto_forward(next_token, transaction_options, options)
     end
+  end
 
-    def auto_forwardable?
-      true
-    end
+  def auto_forwardable?
+    true
   end
 end
