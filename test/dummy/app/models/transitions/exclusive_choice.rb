@@ -7,10 +7,9 @@ class Transitions::ExclusiveChoice < Transition
     instance = token.instance
 
     next_place_id = self.options.conditions.select do |condition|
-      r = ScriptEngine.eval2 condition.condition_expression, input: instance.payload
-      if r.errors.any?
-        raise r.errors.map(&:message).join("; ")
-      end
+      r = ScriptEngine.run_inline condition.condition_expression, payload: instance.payload
+      raise r.errors.map(&:message).join("; ") if r.errors.any?
+
       r.output
     end.first&.place_id || self.options.default_next_place_id
     next_place = workflow.places.find(next_place_id)

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Concerns::Fields
+module Fields
   module Validations::Inclusion
     extend ActiveSupport::Concern
 
     included do
-      embeds_one :inclusion, class_name: "Concerns::Fields::Validations::Inclusion::InclusionOptions"
+      embeds_one :inclusion, class_name: "Fields::Validations::Inclusion::InclusionOptions"
       accepts_nested_attributes_for :inclusion
 
       after_initialize do
@@ -25,7 +25,7 @@ module Concerns::Fields
       def interpret_to(model, field_name, _accessibility, _options = {})
         return if self.in.empty?
 
-        options = {in: self.in}
+        options = { in: self.in }
         options[:message] = message if message.present?
 
         model.validates field_name, inclusion: options, allow_blank: true

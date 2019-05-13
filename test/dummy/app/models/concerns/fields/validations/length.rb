@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Concerns::Fields
+module Fields
   module Validations::Length
     extend ActiveSupport::Concern
 
     included do
-      embeds_one :length, class_name: "Concerns::Fields::Validations::Length::LengthOptions"
+      embeds_one :length, class_name: "Fields::Validations::Length::LengthOptions"
       accepts_nested_attributes_for :length
 
       after_initialize do
@@ -40,10 +40,10 @@ module Concerns::Fields
                 if: proc { |record| !record.maximum.zero? || !record.minimum.zero? }
 
       def interpret_to(model, field_name, _accessibility, _options = {})
-        return if self.minimum.zero? && self.maximum.zero? && self.is.zero?
+        return if minimum.zero? && maximum.zero? && is.zero?
 
         if is.positive?
-          model.validates field_name, length: {is: is}, allow_blank: true
+          model.validates field_name, length: { is: is }, allow_blank: true
           return
         end
 

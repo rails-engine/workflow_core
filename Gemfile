@@ -16,14 +16,14 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem "sqlite3", "~> 1.3.6"
+gem "sqlite3", "~> 1.4"
 
 # Use Puma as the app server
 gem "puma"
 # For better console experience
 gem "pry-rails"
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-gem "web-console"
+gem "web-console", group: :development
 gem "listen", ">= 3.0.5", "< 3.2"
 # Call "byebug" anywhere in the code to stop execution and get a debugger console
 gem "pry-byebug"
@@ -46,10 +46,10 @@ gem "selectize-rails"
 gem "bulma-rails"
 
 gem "rubocop"
-gem "rubocop-rails_config"
+gem "rubocop-performance"
 
 gem "form_core"
-gem "duck_record"
+gem "activeentity"
 gem "closure_tree"
 gem "cocoon"
 gem "script_core"

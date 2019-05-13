@@ -7,13 +7,14 @@ SCRIPT__TOP.stdout_buffer = ""
 
 module Kernel
   def puts(*args)
-    unless args.empty?
+    if args.any?
       args.each do |arg|
-        SCRIPT__TOP.stdout_buffer << arg.to_s
-        SCRIPT__TOP.stdout_buffer << "\n"
+        SCRIPT__TOP.stdout_buffer << "#{arg}\n"
       end
     else
       SCRIPT__TOP.stdout_buffer << "\n"
     end
+
+    nil
   end
 end
