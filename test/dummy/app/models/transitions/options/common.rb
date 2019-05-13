@@ -10,14 +10,14 @@ module Transitions::Options
       attribute :accessibility, :integer, default: 0
 
       attr_readonly :name
-      enum accessibility: {read_and_write: 0, readonly: 1, hidden: 2},
+      enum accessibility: { read_and_write: 0, readonly: 1, hidden: 2 },
            _prefix: :access
 
       validates :name,
                 presence: true
 
       validates :accessibility,
-                inclusion: {in: self.accessibilities.keys.map(&:to_sym)}
+                inclusion: { in: accessibilities.keys.map(&:to_sym) }
 
       def name
         self[:name]&.to_sym

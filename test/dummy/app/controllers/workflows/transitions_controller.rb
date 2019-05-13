@@ -14,8 +14,7 @@ class Workflows::TransitionsController < Workflows::ApplicationController
   end
 
   # GET /workflows/1/transitions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /workflows/1/transitions
   def create
@@ -45,13 +44,13 @@ class Workflows::TransitionsController < Workflows::ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_transition
-    @transition = @workflow.transitions.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_transition
+      @transition = @workflow.transitions.find(params[:id])
+    end
 
-  # Only allow a trusted parameter "white list" through.
-  def transition_params
-    params.fetch(:transition, {}).permit(:name, :type)
-  end
+    # Only allow a trusted parameter "white list" through.
+    def transition_params
+      params.fetch(:transition, {}).permit(:name, :type)
+    end
 end

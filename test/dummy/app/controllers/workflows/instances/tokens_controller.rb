@@ -34,19 +34,19 @@ module Workflows
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_token
-      @token = @instance.tokens.find(params[:id] || params[:token_id])
-    end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_token
+        @token = @instance.tokens.find(params[:id] || params[:token_id])
+      end
 
-    def set_form_model
-      @form = @workflow.form
-      overrides = @token.place.output_transition.options.field_overrides.map { |o| {o.name => {accessibility: o.accessibility}} }.reduce(&:merge) || {}
-      @virtual_model = @form.to_virtual_model overrides: overrides
-    end
+      def set_form_model
+        @form = @workflow.form
+        overrides = @token.place.output_transition.options.field_overrides.map { |o| { o.name => { accessibility: o.accessibility } } }.reduce(&:merge) || {}
+        @virtual_model = @form.to_virtual_model overrides: overrides
+      end
 
-    def form_record_params
-      params.fetch(:form_record, {}).permit!
-    end
+      def form_record_params
+        params.fetch(:form_record, {}).permit!
+      end
   end
 end

@@ -15,8 +15,7 @@ class Workflows::FieldsController < Workflows::ApplicationController
   end
 
   # GET /workflows/1/fields/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /workflows/1/fields
   def create
@@ -46,17 +45,17 @@ class Workflows::FieldsController < Workflows::ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_form
-    @form = @workflow.form
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_form
+      @form = @workflow.form
+    end
 
-  def set_field
-    @field = @form.fields.find(params[:id])
-  end
+    def set_field
+      @field = @form.fields.find(params[:id])
+    end
 
-  # Only allow a trusted parameter "white list" through.
-  def field_params
-    params.fetch(:field, {}).permit(:name, :label, :hint, :type)
-  end
+    # Only allow a trusted parameter "white list" through.
+    def field_params
+      params.fetch(:field, {}).permit(:name, :label, :hint, :type)
+    end
 end

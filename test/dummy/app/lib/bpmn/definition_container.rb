@@ -5,7 +5,7 @@ module Bpmn
     attr_reader :collection
 
     def initialize(tokens)
-      @collection = tokens.map { |t| {t.id => t} }.reduce(&:merge!)
+      @collection = tokens.map { |t| { t.id => t } }.reduce(&:merge!)
       @start_id = tokens.first { |t| t.node_type == :start_event }.id
     end
 

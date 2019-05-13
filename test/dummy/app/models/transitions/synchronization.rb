@@ -9,8 +9,8 @@ class Transitions::Synchronization < Transition
     # TODO: consider if status are not completed
     completed_tokens =
       input_places
-        .includes(:tokens).where(workflow_tokens: {instance_id: token.instance_id})
-        .map(&:tokens).flatten.select(&:completed?)
+      .includes(:tokens).where(workflow_tokens: { instance_id: token.instance_id })
+      .map(&:tokens).flatten.select(&:completed?)
     if completed_tokens.size == input_places.size
       next_token = p.tokens.create! previous: token, type: "Token",
                                     instance: token.instance, workflow: workflow

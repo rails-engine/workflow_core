@@ -6,9 +6,9 @@ module Workflows
 
     protected
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_field
-      @field = @workflow.fields.find(params[:field_id])
-    end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_field
+        @field = @workflow.fields.find(params[:field_id])
+      end
   end
 end

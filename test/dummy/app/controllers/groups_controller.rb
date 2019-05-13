@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: %i[show edit update destroy]
 
   # GET /groups
   def index
@@ -15,8 +15,7 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /groups
   def create
@@ -45,13 +44,14 @@ class GroupsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_group
-    @group = Group.find(params[:id])
-  end
 
-  # Only allow a trusted parameter "white list" through.
-  def group_params
-    params.require(:group).permit(:name, :parent_id)
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_group
+      @group = Group.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def group_params
+      params.require(:group).permit(:name, :parent_id)
+    end
 end

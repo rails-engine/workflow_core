@@ -23,8 +23,8 @@ gem "puma"
 # For better console experience
 gem "pry-rails"
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-gem "web-console", group: :development
 gem "listen", ">= 3.0.5", "< 3.2"
+gem "web-console", group: :development
 # Call "byebug" anywhere in the code to stop execution and get a debugger console
 gem "pry-byebug"
 
@@ -40,18 +40,18 @@ gem "sassc-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 
-gem "jquery-rails"
-gem "turbolinks"
-gem "selectize-rails"
 gem "bulma-rails"
+gem "jquery-rails"
+gem "selectize-rails"
+gem "turbolinks"
 
 gem "rubocop"
 gem "rubocop-performance"
 
-gem "form_core"
 gem "activeentity"
 gem "closure_tree"
 gem "cocoon"
+gem "form_core"
 gem "script_core"
 
 gem "graphviz"

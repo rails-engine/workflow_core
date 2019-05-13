@@ -4,8 +4,7 @@ module Workflows
   class Fields::ValidationsController < Fields::ApplicationController
     before_action :set_validations
 
-    def edit
-    end
+    def edit; end
 
     def update
       @validations.assign_attributes(validations_params)
@@ -18,12 +17,12 @@ module Workflows
 
     private
 
-    def set_validations
-      @validations = @field.validations
-    end
+      def set_validations
+        @validations = @field.validations
+      end
 
-    def validations_params
-      params.fetch(:validations, {}).permit!
-    end
+      def validations_params
+        params.fetch(:validations, {}).permit!
+      end
   end
 end

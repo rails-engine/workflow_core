@@ -30,7 +30,7 @@ module Concerns::Fields
     end
 
     def to_builder_options
-      {min: min, max: max, step: step, required: required?}.reject { |_, v| v.blank? }
+      { min: min, max: max, step: step, required: required? }.reject { |_, v| v.blank? }
     end
   end
 end

@@ -12,7 +12,7 @@ module WorkflowCore
 
     belongs_to :place
     belongs_to :previous, optional: true,
-               class_name: "WorkflowCore::Token"
+                          class_name: "WorkflowCore::Token"
 
     enum status: {
       processing: 0,

@@ -3,8 +3,8 @@
 class CreateWorkflowPlaces < ActiveRecord::Migration[5.2]
   def change
     create_table :workflow_places do |t|
-      t.references :input_transition, foreign_key: {to_table: "workflow_transitions"}
-      t.references :output_transition, foreign_key: {to_table: "workflow_transitions"}
+      t.references :input_transition, foreign_key: { to_table: "workflow_transitions" }
+      t.references :output_transition, foreign_key: { to_table: "workflow_transitions" }
 
       t.string :type, null: false
       t.references :workflow, foreign_key: true

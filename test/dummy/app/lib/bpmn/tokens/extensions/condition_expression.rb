@@ -13,6 +13,7 @@ module Bpmn
     def self.factory(xelement)
       ce = xelement.at_xpath("bpmn:conditionExpression")
       return nil unless ce
+
       new(ce)
     end
 
@@ -20,9 +21,9 @@ module Bpmn
       {
         language: language,
         condition: condition,
-        type: type,
+        type: type
       }
     end
-    alias_method :to_h, :to_hash
+    alias to_h to_hash
   end
 end

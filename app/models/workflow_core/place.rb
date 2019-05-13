@@ -9,9 +9,9 @@ module WorkflowCore
     belongs_to :workflow
 
     belongs_to :input_transition, optional: true, foreign_key: "input_transition_id",
-               class_name: "WorkflowCore::Transition"
+                                  class_name: "WorkflowCore::Transition"
     belongs_to :output_transition, optional: true, foreign_key: "output_transition_id",
-               class_name: "WorkflowCore::Transition"
+                                   class_name: "WorkflowCore::Transition"
 
     has_many :tokens
   end

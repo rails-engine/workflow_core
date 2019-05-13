@@ -27,9 +27,7 @@ class Transition < WorkflowCore::Transition
     end
     current = nodes[key]
 
-    if prev && !prev.connected?(current)
-      prev.connect(current, label: arc_label)
-    end
+    prev.connect(current, label: arc_label) if prev && !prev.connected?(current)
 
     output_places.each do |succ|
       succ.append_to_graph(g, prev: current, nodes: nodes)
@@ -40,13 +38,13 @@ class Transition < WorkflowCore::Transition
 
   protected
 
-  def auto_forward(next_token, transaction_options, **options)
-    transition = next_token.place.output_transition
-    return unless transition
-    return unless transition.auto_forwardable?
+    def auto_forward(next_token, transaction_options, **options)
+      transition = next_token.place.output_transition
+      return unless transition
+      return unless transition.auto_forwardable?
 
-    transition.on_fire(next_token, transaction_options, options)
-  end
+      transition.on_fire(next_token, transaction_options, options)
+    end
 end
 
 require_dependency "transitions"

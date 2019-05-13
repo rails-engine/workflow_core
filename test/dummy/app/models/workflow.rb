@@ -30,7 +30,7 @@ class Workflow < WorkflowCore::Workflow
     place = create_start_place! type: "Places::StartPlace"
     node_queue = c.start_event.outgoing_ids
 
-    convert_node_type = -> (node) do
+    convert_node_type = lambda do |node|
       case node.node_type
       when :task
         "Transitions::Sequence"
@@ -43,7 +43,7 @@ class Workflow < WorkflowCore::Workflow
       when :exclusive_gateway
         node.outgoing_ids.size == 1 ? "Transitions::SimpleMerge" : "Transitions::ExclusiveChoice"
       else
-        raise NotImplementedError.new("#{node.node_type} doesn't support yet.")
+        raise NotImplementedError, "#{node.node_type} doesn't support yet."
       end
     end
 
@@ -54,6 +54,7 @@ class Workflow < WorkflowCore::Workflow
         target_id = node_queue.pop
         curr_node = c[target_id]
         raise "#{target_id} not found!" unless curr_node
+
         # puts "1 #{curr_node.name} #{curr_node.node_type} from #{curr_node.try(:incoming_ids)&.join(", ") || curr_node.try(:source_id)} to #{curr_node.try(:outgoing_ids)&.join(", ") || curr_node.try(:target_id)}"
 
         if curr_node.flow?
@@ -77,11 +78,9 @@ class Workflow < WorkflowCore::Workflow
         end
 
         transition = transitions.find_by uid: c[curr_node.id].id
-        unless transition
-          transition = place.create_output_transition! name: curr_node.name, uid: curr_node.id,
+        transition ||= place.create_output_transition! name: curr_node.name, uid: curr_node.id,
                                                        type: convert_node_type.call(curr_node),
                                                        workflow: self
-        end
 
         dup_place = places.find_by input_transition_id: place.input_transition_id, output_transition_id: transition.id
         if dup_place
@@ -130,11 +129,11 @@ class Workflow < WorkflowCore::Workflow
 
   private
 
-  def auto_create_form!
-    create_form! type: "Form"
-  end
+    def auto_create_form!
+      create_form! type: "Form"
+    end
 
-  def auto_create_start_place!
-    create_start_place! type: "Places::StartPlace"
-  end
+    def auto_create_start_place!
+      create_start_place! type: "Places::StartPlace"
+    end
 end

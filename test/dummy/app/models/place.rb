@@ -13,9 +13,7 @@ class Place < WorkflowCore::Place
     end
     current = nodes[key]
 
-    if prev && !prev.connected?(current)
-      prev.connect(current, label: arc_label)
-    end
+    prev.connect(current, label: arc_label) if prev && !prev.connected?(current)
 
     if output_transition
       next_node = nodes["t_#{output_transition.id}"]

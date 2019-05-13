@@ -4,8 +4,7 @@ module Workflows
   class Fields::OptionsController < Fields::ApplicationController
     before_action :set_options
 
-    def edit
-    end
+    def edit; end
 
     def update
       @options.assign_attributes(options_params)
@@ -18,12 +17,12 @@ module Workflows
 
     private
 
-    def set_options
-      @options = @field.options
-    end
+      def set_options
+        @options = @field.options
+      end
 
-    def options_params
-      params.fetch(:options, {}).permit!
-    end
+      def options_params
+        params.fetch(:options, {}).permit!
+      end
   end
 end
