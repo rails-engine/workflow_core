@@ -1,4 +1,6 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
+  - rubocop-rails
 
 AllCops:
   TargetRubyVersion: 2.5
@@ -7,6 +9,10 @@ AllCops:
     - test/dummy/bin/**/*
     - test/dummy/mruby/**/*
     - test/dummy/db/schema.rb
+
+Performance:
+  Exclude:
+    - 'test/**/*'
 
 Rails:
   Enabled: true
@@ -105,7 +111,7 @@ Style/HashSyntax:
 # extra level of indentation.
 Layout/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 
 # Two spaces, no tabs (for indentation).
 Layout/IndentationWidth:

@@ -47,6 +47,7 @@ gem "turbolinks"
 
 gem "rubocop"
 gem "rubocop-performance"
+gem "rubocop-rails"
 
 gem "activeentity"
 gem "closure_tree"
