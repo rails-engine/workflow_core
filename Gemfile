@@ -50,9 +50,9 @@ gem "rubocop-performance"
 gem "rubocop-rails"
 
 gem "activeentity"
-gem "closure_tree"
 gem "cocoon"
 gem "form_core"
+gem "globalid"
 gem "script_core"
 
 gem "graphviz"

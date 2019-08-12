@@ -13,13 +13,17 @@ module Workflows
     # POST /workflows/1/tokens/1/fire
     def show
       @transition_valid = @token.place.output_transition.options.valid?
-      @form_record = @virtual_model.load(@instance.payload)
+      @form_record = @virtual_model.new(@instance.payload)
     end
 
     # POST /workflows/1/tokens/1/fire
     def fire
-      @form_record = @virtual_model.load(@instance.payload)
-      @form_record.assign_attributes(form_record_params)
+      form_params = form_record_params
+      @token.payload.note = form_params[:_note]
+      @token.payload.action = form_params[:_action]
+
+      @form_record = @virtual_model.new(@instance.payload)
+      @form_record.assign_attributes(form_params.except(:_note, :_action))
       @transition_valid = @token.place.output_transition.options.valid?
 
       if @form_record.valid? && @transition_valid

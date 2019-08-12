@@ -23,7 +23,7 @@ Rails.application.routes.draw do
           resource :options, only: %i[edit update]
         end
       end
-      resources :instances, only: %i[index show create] do
+      resources :instances, only: %i[index show new create] do
         scope module: :instances do
           resources :tokens, only: %i[index show] do
             post "fire"

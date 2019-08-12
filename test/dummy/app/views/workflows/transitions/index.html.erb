@@ -17,8 +17,9 @@
           <td><%= transition.class.model_name.human %></td>
           <td>
             <% if transition.options_configurable? %>
-              <%= link_to "Options", edit_workflow_transition_options_path(@workflow, transition) %>
+              <%= link_to "Options", edit_workflow_transition_options_path(@workflow, transition) %> |
             <% end %>
+            <%= link_to "Edit", edit_workflow_transition_path(@workflow, transition) %>
           </td>
         </tr>
       <% end %>

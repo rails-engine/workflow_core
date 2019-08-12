@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 module Transitions::Options
-  class Common < FieldOptions
-    embeds_many :field_overrides, class_name: "Transitions::Options::Common::FieldOverride"
-    accepts_nested_attributes_for :field_overrides
+  module FieldOverridable
+    extend ActiveSupport::Concern
+
+    included do
+      embeds_many :field_overrides, class_name: "Transitions::Options::FieldOverridable::FieldOverride"
+      accepts_nested_attributes_for :field_overrides
+    end
 
     class FieldOverride < FieldOptions
       attribute :name, :string

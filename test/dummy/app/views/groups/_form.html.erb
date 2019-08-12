@@ -21,16 +21,6 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :parent, class: "label" %>
-    <div class="control">
-      <div class="select">
-        <% parent_candidates = Group.all.reject { |g| group.child_ids.include?(g.id) || g == group unless group.new_record? } %>
-        <%= f.collection_select :parent_id, parent_candidates, :id, :name, include_blank: true %>
-      </div>
-    </div>
-  </div>
-
   <div class="field is-grouped">
     <div class="control">
       <%= f.submit class: "button is-primary" %>

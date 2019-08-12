@@ -8,7 +8,7 @@ class Place < WorkflowCore::Place
   def append_to_graph(g, prev: nil, arc_label: "", nodes: {})
     key = "p_#{id}"
     unless nodes[key]
-      nodes[key] = Graphviz::Node.new("p.#{id}#{": #{name}" if name.present?}", shape: "circle")
+      nodes[key] = Graphviz::Node.new("p.#{id}#{": #{name}" if name.present?}", shape: "box", style: "rounded")
       g << nodes[key]
     end
     current = nodes[key]

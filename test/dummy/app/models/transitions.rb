@@ -9,4 +9,10 @@ module Transitions
   ].each do |type|
     require_dependency "transitions/#{type}"
   end
+
+  %w[
+    user_task assigning_assignees decision
+  ].each do |type|
+    require_dependency "transitions/variants/#{type}"
+  end
 end

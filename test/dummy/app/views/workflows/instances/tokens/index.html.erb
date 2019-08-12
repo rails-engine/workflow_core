@@ -4,6 +4,7 @@
       <thead>
       <tr>
         <th>Id</th>
+        <th>Assignee</th>
         <th>Status</th>
         <th>Transition id</th>
         <th>Transition name</th>
@@ -14,7 +15,7 @@
       <tbody>
       <tfoot>
       <tr>
-        <th colspan="6">
+        <th colspan="7">
           Instance status: <%= @instance.status %>
         </th>
       </tr>
@@ -22,6 +23,7 @@
       <% @tokens.each do |token| %>
         <tr>
           <td><%= token.id %></td>
+          <th><%= token.assignable&.name %></th>
           <td><%= token.status %></td>
           <td><%= token.place&.output_transition&.id %></td>
           <td><%= token.place&.output_transition&.name %></td>

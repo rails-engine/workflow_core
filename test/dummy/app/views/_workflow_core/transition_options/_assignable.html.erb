@@ -1,0 +1,20 @@
+<div class="form-group">
+  <%= f.label :assign_to %>
+  <div class="form-group">
+    <% options.class.assign_tos.each do |k, _| %>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :assign_to, k, class: "form-check-input", id: "assign_to_#{k}" %>
+        <%= f.label :assign_to, options.class.human_enum_value(:assign_to, k), class: "form-check-label", for: "assign_to_#{k}" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="field">
+  <%= f.label :assignee_user_ids, class: "label" %>
+  <div class="control">
+    <span class="select is-multiple">
+      <%= f.select :assignee_user_ids, options_from_collection_for_select(User.all, :id, :name, f.object.assignee_user_ids), {}, multiple: true %>
+    </span>
+  </div>
+</div>

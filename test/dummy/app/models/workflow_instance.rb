@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorkflowInstance < WorkflowCore::WorkflowInstance
+  belongs_to :creator, class_name: "User"
+
   after_create :auto_create_start_token!
 
   private
@@ -8,6 +10,7 @@ class WorkflowInstance < WorkflowCore::WorkflowInstance
     def auto_create_start_token!
       tokens.create! place: workflow.start_place,
                      workflow: workflow,
-                     type: "Token"
+                     type: "Token",
+                     assignable: creator
     end
 end

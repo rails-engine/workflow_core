@@ -22,6 +22,6 @@ class Transitions::ExclusiveChoice < Transition
   end
 
   def auto_forwardable?
-    false
+    true
   end
 end

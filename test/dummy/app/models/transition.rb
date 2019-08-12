@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class Transition < WorkflowCore::Transition
-  serialize :options, Transitions::Options::Common
+  serialize :options, NonConfigurable
 
   def auto_forwardable?
     false
   end
 
   def options_configurable?
-    true
+    options.attributes.any? || options.class.reflections.any?
   end
 
   def self.type_key

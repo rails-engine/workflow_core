@@ -8,9 +8,15 @@ module WorkflowCore
 
     belongs_to :workflow
 
-    has_many :input_places, dependent: :nullify,
-                            foreign_key: "output_transition_id", class_name: "WorkflowCore::Place"
-    has_many :output_places, dependent: :destroy,
-                             foreign_key: "input_transition_id", class_name: "WorkflowCore::Place"
+    has_many :input_places,
+             dependent: :nullify,
+             foreign_key: "output_transition_id",
+             class_name: "WorkflowCore::Place",
+             inverse_of: :output_transition
+    has_many :output_places,
+             dependent: :destroy,
+             foreign_key: "input_transition_id",
+             class_name: "WorkflowCore::Place",
+             inverse_of: :input_transition
   end
 end

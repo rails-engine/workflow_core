@@ -34,6 +34,8 @@ class Workflow < WorkflowCore::Workflow
       case node.node_type
       when :task
         "Transitions::Sequence"
+      when :user_task
+        "Transitions::Sequence"
       when :start_event
         "Transitions::Start"
       when :end_event
@@ -103,34 +105,10 @@ class Workflow < WorkflowCore::Workflow
     end
   end
 
-  # TODO: remove in future
-  def self.seed
-    w = nil
-
-    transaction do
-      w = create name: "Demo"
-      p = w.start_place
-      t = p.create_output_transition! type: "Transitions::Sequence", workflow: w
-      p.update! output_transition: t
-
-      p = t.output_places.create! type: "Place", workflow: w
-      t = p.create_output_transition! type: "Transitions::Sequence", workflow: w
-      p.update! output_transition: t
-
-      p = t.output_places.create! type: "Place", workflow: w
-      t = p.create_output_transition! type: "Transitions::Sequence", workflow: w
-      p.update! output_transition: t
-
-      t.output_places.create! type: "Places::EndPlace", workflow: w
-    end
-
-    w
-  end
-
   private
 
     def auto_create_form!
-      create_form! type: "Form"
+      create_form! type: "Form", name: SecureRandom.hex(3)
     end
 
     def auto_create_start_place!

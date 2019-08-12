@@ -4,6 +4,7 @@ module Workflows
   class Instances::ApplicationController < ApplicationController
     layout "workflow_instances"
 
+    before_action :require_signed_in
     before_action :set_instance
 
     protected

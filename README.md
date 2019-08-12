@@ -15,13 +15,11 @@ WorkflowCore is originally designed for Business Process Management (BPM), in th
 - Task may tight with application features
 - May meet some special or weird requirements
 
-WorkflowCore is based on [Workflow Net](http://mlwiki.org/index.php/Workflow_Nets) technique, and only providing essential features for a workflow engine.
+WorkflowCore is based on [Petri Net](http://mlwiki.org/index.php/Petri_Nets) technique, and only providing essential features for a workflow engine.
 
 ## Features
 
-### Models to describe workflow net
-
-Workflow Net is a special case of [Petri net](http://mlwiki.org/index.php/Petri_Nets)
+### Models to describe Petri Net
 
 ![](_assets/workflow_net.png)
 
@@ -30,7 +28,7 @@ There are two kinds of nodes
 - Place (circles): represent the states of a system
 - Transition (squares): represent state changes
 
-WorkflowCore provides Place & Transition models that can represent a workflow net, and a Workflow model as root.
+WorkflowCore provides Place & Transition models that can represent a Petri Net, and a Workflow model as root.
 
 ### Models to describe workflow instances
 
@@ -66,8 +64,8 @@ BTW, the dummy app is a full-featured app with production level codebase that yo
 
 ## Requirements
 
-- MRI 2.3+
-- Rails 5.0+
+- MRI 2.5+
+- Rails 6.0+
 
 ## Usage
 
@@ -144,7 +142,13 @@ Preparing database
 
 ```sh
 $ bin/rails db:migrate
-```
+```    
+
+Import sample workflow
+
+```sh
+$ bin/rails db:seed
+```  
 
 Start the Rails server
 

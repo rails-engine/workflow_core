@@ -1,11 +1,20 @@
 <div class="section">
   <div class="container">
-    <p content="content">
+    <div content="content" id="workflow-container">
       <iframe id="iframe-visualize"
               srcdoc="<%= Graphviz::output(@workflow.to_graph, format: "svg") %>"
-              width="100%"
-              onload="this.height = getElementById('iframe-visualize').contentDocument.body.scrollHeight;">
+              width="100%">
       </iframe>
-    </p>
+      <script>
+        document.addEventListener("turbolinks:load", function() {
+          const iframe = document.getElementById("iframe-visualize");
+          if (iframe !== null) {
+            iframe.contentWindow.addEventListener("DOMContentLoaded", function () {
+              iframe.setAttribute("style", "overflow: hidden !important; height: " + iframe.contentDocument.body.scrollHeight + "px !important;");
+            });
+          }
+        });
+      </script>
+    </div>
   </div>
 </div>

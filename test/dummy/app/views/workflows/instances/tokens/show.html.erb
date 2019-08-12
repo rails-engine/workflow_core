@@ -7,8 +7,69 @@
       </div>
     <% end %>
 
-    <%= render "_form_core/render/form",
-               form: @form, instance: @form_record,
-               options: {scope: :form_record, url: workflow_instance_token_fire_path(@workflow, @instance, @token), local: true} %>
+    <% form = @form %>
+    <% instance = @form_record %>
+
+    <%= form_with(model: instance, scope: :form_record, url: workflow_instance_token_fire_path(@workflow, @instance, @token), local: true) do |f| %>
+      <% if instance.errors.any? %>
+        <article class="message is-danger">
+          <div class="message-header">
+            <p>
+              <%= pluralize(instance.errors.count, "error") %> prohibited this form from being submitted:
+            </p>
+          </div>
+          <div class="message-body content">
+            <ul>
+              <% instance.errors.messages.each do |name, messages| %>
+                <% messages.each do |message| %>
+                  <li><%= "#{field_label(form, field_name: name)} #{message}" %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </article>
+      <% end %>
+
+      <% form.fields.each do |field| %>
+        <% field = present(field, target: instance) %>
+        <% next if field.access_hidden? %>
+
+        <%= render "_form_core/fields/#{field.type_key}", f: f, field: field %>
+      <% end %>
+
+      <hr>
+
+      <div class="field">
+        <%= f.label :_note, class: "label" %>
+        <div class="control">
+          <%= f.text_area :_note, class: "textarea", rows: 3 %>
+        </div>
+      </div>
+
+      <% if @token.place.output_transition.is_a? Transitions::Variants::Decision %>
+        <div class="field">
+          <%= f.label :_action, "Action", class: "label" %>
+          <div class="control">
+            <% actions = @token.place.output_transition.options.actions %>
+            <% actions.each do |action| %>
+              <label class="radio">
+                <%= f.radio_button :_action, action.value %>
+                <%= action.text %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <%= f.submit "Submit", class: "button is-primary" %>
+        </div>
+        <div class="control">
+          <%= link_to "Back", workflow_instance_tokens_path(@workflow, @instance), class: "button is-link" %>
+        </div>
+      </div>
+    <% end %>
+
   </div>
 </div>

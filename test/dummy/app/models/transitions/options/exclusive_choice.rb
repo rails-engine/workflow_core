@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Transitions::Options
-  class ExclusiveChoice < Common
+  class ExclusiveChoice < FieldOptions
     attribute :default_next_place_id, :integer
 
     embeds_many :conditions, class_name: "Transitions::Options::ExclusiveChoice::Condition"

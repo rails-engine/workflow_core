@@ -2,11 +2,11 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
   end
 
   create_table "forms", force: :cascade do |t|
+    t.string "name", null: false
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,24 +39,15 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.integer "attachable_id"
     t.integer "workflow_id"
     t.index ["attachable_type", "attachable_id"], name: "index_forms_on_attachable_type_and_attachable_id"
+    t.index ["name"], name: "index_forms_on_name", unique: true
     t.index ["type"], name: "index_forms_on_type"
     t.index ["workflow_id"], name: "index_forms_on_workflow_id"
-  end
-
-  create_table "group_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "group_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "group_desc_idx"
   end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "parent_id"
-    t.index ["parent_id"], name: "index_groups_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,6 +65,9 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
+    t.string "creator_type"
+    t.integer "creator_id"
+    t.index ["creator_type", "creator_id"], name: "index_workflow_instances_on_creator_type_and_creator_id"
     t.index ["workflow_id"], name: "index_workflow_instances_on_workflow_id"
   end
 
@@ -99,6 +94,13 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
+    t.text "payload"
+    t.string "assignable_type"
+    t.integer "assignable_id"
+    t.string "forwardable_type"
+    t.integer "forwardable_id"
+    t.index ["assignable_type", "assignable_id"], name: "index_workflow_tokens_on_assignable_type_and_assignable_id"
+    t.index ["forwardable_type", "forwardable_id"], name: "index_workflow_tokens_on_forwardable_type_and_forwardable_id"
     t.index ["instance_id"], name: "index_workflow_tokens_on_instance_id"
     t.index ["place_id"], name: "index_workflow_tokens_on_place_id"
     t.index ["previous_id"], name: "index_workflow_tokens_on_previous_id"
@@ -124,4 +126,17 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.text "description", default: ""
   end
 
+  add_foreign_key "fields", "forms"
+  add_foreign_key "fields", "workflows"
+  add_foreign_key "forms", "workflows"
+  add_foreign_key "users", "groups"
+  add_foreign_key "workflow_instances", "workflows"
+  add_foreign_key "workflow_places", "workflow_transitions", column: "input_transition_id"
+  add_foreign_key "workflow_places", "workflow_transitions", column: "output_transition_id"
+  add_foreign_key "workflow_places", "workflows"
+  add_foreign_key "workflow_tokens", "workflow_instances", column: "instance_id"
+  add_foreign_key "workflow_tokens", "workflow_places", column: "place_id"
+  add_foreign_key "workflow_tokens", "workflow_tokens", column: "previous_id"
+  add_foreign_key "workflow_tokens", "workflows"
+  add_foreign_key "workflow_transitions", "workflows"
 end

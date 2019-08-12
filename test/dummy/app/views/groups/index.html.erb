@@ -8,7 +8,6 @@
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Parent name</th>
         <th></th>
       </tr>
       </thead>
@@ -17,7 +16,6 @@
         <tr>
           <td><%= group.id %></td>
           <td><%= group.name %></td>
-          <td><%= group.parent&.name %></td>
           <td>
             <%= link_to "Edit", edit_group_path(group) %> |
             <%= link_to "Destroy", group, method: :delete, data: {confirm: "Are you sure?"} %>

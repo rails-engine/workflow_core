@@ -1,0 +1,20 @@
+<%= render "_workflow_core/transition_options/field_overridable", f: f, transition: transition, options: options %>
+
+<div class="field nested_form_field">
+  <h2 class="label">Actions</h2>
+
+  <div id="actions" class="collection">
+    <%= f.fields_for :actions do |ff| %>
+      <%= render "_workflow_core/transition_options/action", f: ff, transition: transition %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association "Add", f, "actions",
+                                  class: "button is-small",
+                                  partial: "_workflow_core/transition_options/action",
+                                  render_options: {
+                                    locals: {transition: transition}
+                                  } %>
+    </div>
+  </div>
+</div>
