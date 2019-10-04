@@ -18,7 +18,7 @@ tmp_p = workflow.start_place
 fill_form_t = tmp_p.create_output_transition! type: "Transitions::Variants::UserTask",
                                               workflow: workflow,
                                               name: "Fill request form"
-tmp_p.update_attribute :output_transition_id, fill_form_t.id
+tmp_p.update! output_transition_id: fill_form_t.id
 
 tmp_p = fill_form_t.output_places.create! type: "Place",
                                           workflow: workflow,
@@ -29,7 +29,7 @@ tmp_p = fill_form_t.output_places.create! type: "Place",
 tmp_t = tmp_p.create_output_transition! type: "Transitions::Variants::AssigningAssignees",
                                         workflow: workflow,
                                         name: "Assign approvers"
-tmp_p.update_attribute :output_transition_id, tmp_t.id
+tmp_p.update! output_transition_id: tmp_t.id
 tmp_t.options.assign_to = "specific"
 tmp_t.options.assignee_user_ids = [user_2.id, user_3.id]
 tmp_t.save!
@@ -41,7 +41,7 @@ tmp_p = tmp_t.output_places.create! type: "Place",
 decision_t = tmp_p.create_output_transition! type: "Transitions::Variants::Decision",
                                              workflow: workflow,
                                              name: "Make decision"
-tmp_p.update_attribute :output_transition_id, decision_t.id
+tmp_p.update! output_transition_id: decision_t.id
 
 approved_p = decision_t.output_places.create! type: "Place",
                                               workflow: workflow,
@@ -60,7 +60,7 @@ decision_t.save!
 tmp_t = rejected_p.create_output_transition! type: "Transitions::Variants::AssigningAssignees",
                                              workflow: workflow,
                                              name: "Assign to applicant"
-rejected_p.update_attribute :output_transition_id, tmp_t.id
+rejected_p.update! output_transition_id: tmp_t.id
 
 tmp_t.output_places.create! type: "Place",
                             workflow: workflow,
@@ -73,7 +73,7 @@ tmp_t.output_places.create! type: "Place",
 tmp_t = approved_p.create_output_transition! type: "Transitions::Variants::AssigningAssignees",
                                              workflow: workflow,
                                              name: "Assign to applicant"
-approved_p.update_attribute :output_transition_id, tmp_t.id
+approved_p.update! output_transition_id: tmp_t.id
 
 tmp_p = tmp_t.output_places.create! type: "Place",
                                     workflow: workflow,
@@ -82,7 +82,7 @@ tmp_p = tmp_t.output_places.create! type: "Place",
 tmp_t = tmp_p.create_output_transition! type: "Transitions::Variants::UserTask",
                                         workflow: workflow,
                                         name: "Review request form"
-tmp_p.update_attribute :output_transition_id, tmp_t.id
+tmp_p.update! output_transition_id: tmp_t.id
 tmp_t.options.field_overrides.build name: reason_field.name, accessibility: "readonly"
 tmp_t.save!
 
@@ -95,7 +95,7 @@ tmp_p = tmp_t.output_places.create! type: "Place",
 tmp_t = tmp_p.create_output_transition! type: "Transitions::End",
                                         workflow: workflow,
                                         name: "Workflow complete"
-tmp_p.update_attribute :output_transition_id, tmp_t.id
+tmp_p.update! output_transition_id: tmp_t.id
 
 tmp_t.output_places.create! type: "Places::EndPlace",
                             workflow: workflow
