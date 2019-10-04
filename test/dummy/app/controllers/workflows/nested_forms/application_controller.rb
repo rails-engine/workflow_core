@@ -8,7 +8,7 @@ module Workflows
 
       # Use callbacks to share common setup or constraints between actions.
       def set_nested_form
-        @nested_form = @workflow.nested_forms.find(params[:nested_form_id])
+        @nested_form = NestedForm.find(params[:nested_form_id])
       end
   end
 end

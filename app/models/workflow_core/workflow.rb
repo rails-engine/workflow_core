@@ -6,7 +6,7 @@ module WorkflowCore
 
     self.table_name = "workflows"
 
-    has_one :start_place, class_name: "WorkflowCore::Place", dependent: :destroy
+    belongs_to :start_place, class_name: "WorkflowCore::Place", dependent: :destroy, optional: true
 
     has_many :transitions, class_name: "WorkflowCore::Transition", dependent: :destroy
     has_many :places, class_name: "WorkflowCore::Place", dependent: :destroy

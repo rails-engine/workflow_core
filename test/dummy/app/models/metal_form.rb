@@ -5,7 +5,9 @@ class MetalForm < ApplicationRecord
 
   self.table_name = "forms"
 
-  belongs_to :workflow
-
   has_many :fields, foreign_key: "form_id", dependent: :destroy
+
+  default_value_for :name,
+                    ->(_) { "field_#{SecureRandom.hex(3)}" },
+                    allow_nil: false
 end

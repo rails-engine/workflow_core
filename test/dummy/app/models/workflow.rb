@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Workflow < WorkflowCore::Workflow
-  has_one :form, dependent: :destroy
-  has_many :nested_forms
-  has_many :fields
+  belongs_to :form, dependent: :destroy, optional: true
+  has_many :fields, through: :form
 
   after_create :auto_create_form!
   after_create :auto_create_start_place!
@@ -109,9 +108,11 @@ class Workflow < WorkflowCore::Workflow
 
     def auto_create_form!
       create_form! type: "Form", name: SecureRandom.hex(3)
+      save(validate: false)
     end
 
     def auto_create_start_place!
-      create_start_place! type: "Places::StartPlace"
+      create_start_place! type: "Places::StartPlace", workflow: self
+      save(validate: false)
     end
 end

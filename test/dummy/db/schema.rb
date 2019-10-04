@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_095933) do
+ActiveRecord::Schema.define(version: 2019_10_04_190723) do
 
   create_table "fields", force: :cascade do |t|
     t.string "name", null: false
@@ -24,10 +24,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.string "label", default: ""
     t.string "hint", default: ""
     t.integer "position"
-    t.integer "workflow_id"
     t.index ["form_id"], name: "index_fields_on_form_id"
     t.index ["type"], name: "index_fields_on_type"
-    t.index ["workflow_id"], name: "index_fields_on_workflow_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -37,11 +35,9 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "attachable_type"
     t.integer "attachable_id"
-    t.integer "workflow_id"
     t.index ["attachable_type", "attachable_id"], name: "index_forms_on_attachable_type_and_attachable_id"
     t.index ["name"], name: "index_forms_on_name", unique: true
     t.index ["type"], name: "index_forms_on_type"
-    t.index ["workflow_id"], name: "index_forms_on_workflow_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -122,13 +118,15 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.string "type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "form_id"
     t.string "name", default: ""
     t.text "description", default: ""
+    t.integer "start_place_id"
+    t.index ["form_id"], name: "index_workflows_on_form_id"
+    t.index ["start_place_id"], name: "index_workflows_on_start_place_id"
   end
 
   add_foreign_key "fields", "forms"
-  add_foreign_key "fields", "workflows"
-  add_foreign_key "forms", "workflows"
   add_foreign_key "users", "groups"
   add_foreign_key "workflow_instances", "workflows"
   add_foreign_key "workflow_places", "workflow_transitions", column: "input_transition_id"
@@ -139,4 +137,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
   add_foreign_key "workflow_tokens", "workflow_tokens", column: "previous_id"
   add_foreign_key "workflow_tokens", "workflows"
   add_foreign_key "workflow_transitions", "workflows"
+  add_foreign_key "workflows", "forms"
+  add_foreign_key "workflows", "workflow_places", column: "start_place_id"
 end
