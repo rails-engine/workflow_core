@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateWorkflowTransitions < ActiveRecord::Migration[5.2]
+class CreateWorkflowTransitions < ActiveRecord::Migration[6.0]
   def change
     create_table :workflow_transitions do |t|
       t.string :type, null: false

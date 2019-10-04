@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddColumnsToWorkflowInstances < ActiveRecord::Migration[5.2]
+class AddColumnsToWorkflowInstances < ActiveRecord::Migration[6.0]
   def change
     change_table :workflow_instances do |t|
       t.string :type

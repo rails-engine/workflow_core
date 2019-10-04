@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateWorkflowPlaces < ActiveRecord::Migration[5.2]
+class CreateWorkflowPlaces < ActiveRecord::Migration[6.0]
   def change
     create_table :workflow_places do |t|
       t.references :input_transition, foreign_key: { to_table: "workflow_transitions" }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddColumnsToPlaces < ActiveRecord::Migration[5.2]
+class AddColumnsToPlaces < ActiveRecord::Migration[6.0]
   def change
     change_table :workflow_places do |t|
       t.string :name

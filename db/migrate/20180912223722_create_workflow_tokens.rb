@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateWorkflowTokens < ActiveRecord::Migration[5.2]
+class CreateWorkflowTokens < ActiveRecord::Migration[6.0]
   def change
     create_table :workflow_tokens do |t|
       t.integer :status, null: false, default: 0

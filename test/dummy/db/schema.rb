@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.text "options"
     t.string "type", null: false
     t.integer "form_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "label", default: ""
     t.string "hint", default: ""
     t.integer "position"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
   create_table "forms", force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "attachable_type"
     t.integer "attachable_id"
     t.integer "workflow_id"
@@ -46,15 +46,15 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.integer "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_users_on_group_id"
   end
 
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.text "payload"
     t.integer "status", default: 0, null: false
     t.integer "workflow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.string "creator_type"
     t.integer "creator_id"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.integer "output_transition_id"
     t.string "type", null: false
     t.integer "workflow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "uid"
     t.index ["input_transition_id"], name: "index_workflow_places_on_input_transition_id"
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
     t.integer "previous_id"
     t.integer "instance_id"
     t.integer "workflow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.text "payload"
     t.string "assignable_type"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
   create_table "workflow_transitions", force: :cascade do |t|
     t.string "type", null: false
     t.integer "workflow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "uid"
     t.text "options"
@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_095933) do
 
   create_table "workflows", force: :cascade do |t|
     t.string "type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name", default: ""
     t.text "description", default: ""
   end

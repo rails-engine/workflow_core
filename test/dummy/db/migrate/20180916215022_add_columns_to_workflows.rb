@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddColumnsToWorkflows < ActiveRecord::Migration[5.2]
+class AddColumnsToWorkflows < ActiveRecord::Migration[6.0]
   def change
     change_table :workflows do |t|
       t.string :name, default: ""

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateWorkflowInstances < ActiveRecord::Migration[5.2]
+class CreateWorkflowInstances < ActiveRecord::Migration[6.0]
   def change
     create_table :workflow_instances do |t|
       t.text :payload
