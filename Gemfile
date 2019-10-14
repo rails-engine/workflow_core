@@ -33,7 +33,7 @@ gem "better_errors"
 gem "binding_of_caller"
 
 # To support ES6
-gem "sprockets", "~> 4.0.0.beta4"
+gem "sprockets", "~> 4.0.0"
 # Support ES6
 gem "babel-transpiler"
 # Use SCSS for stylesheets
