@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 user_1 = User.create! name: "Alice"
 user_2 = User.create! name: "Bob"
 user_3 = User.create! name: "Carol"
@@ -66,7 +68,6 @@ tmp_t.output_places.create! type: "Place",
                             workflow: workflow,
                             name: "Refill request form",
                             output_transition_id: fill_form_t.id
-
 
 # Applicant review stage
 
