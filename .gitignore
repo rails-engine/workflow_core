@@ -34,3 +34,6 @@ test/dummy/node_modules/
 yarn-error.log
 
 *.gem
+
+.generators
+.rakeTasks

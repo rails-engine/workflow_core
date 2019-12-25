@@ -21,16 +21,11 @@ gem "sqlite3", "~> 1.4"
 
 # Use Puma as the app server
 gem "puma"
-# For better console experience
-gem "pry-rails"
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 gem "listen", ">= 3.0.5", "< 3.2"
 gem "web-console", group: :development
 # Call "byebug" anywhere in the code to stop execution and get a debugger console
-gem "pry-byebug"
-
-gem "better_errors"
-gem "binding_of_caller"
+gem "byebug", group: %i[development test]
 
 # To support ES6
 gem "sprockets", "~> 4.0.0"
