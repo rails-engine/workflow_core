@@ -14,7 +14,8 @@ module WorkflowCore
       completed: 1,
       failed: 2,
       unexpected: 3,
-      terminated: 4
+      terminated: 4,
+      draft: 10
     }
 
     serialize :payload
